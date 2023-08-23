@@ -1,9 +1,5 @@
 @import "variables";
 
-header {
-    color: $text-color;
-    font-size: 20px;
-    .title {
-        font-weight: bold;
-    }
+.container {
+    margin-top: 20px;
 }

@@ -9,6 +9,9 @@ const port = 3000
 app.use(express.static(path.join(__dirname, 'public')))
 //log
 app.use(morgan('tiny'))
+//middleware
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 //tempalte engine
 app.engine('hbs', engine( {
@@ -31,9 +34,9 @@ app.get('/search', (req, res) => {
   console.log(req.query);
 })
 
-app.post('/search-post', (req, res) => {
-  res.render('search', {obj: req.query})
-  console.log(req.query);
+app.post('/search', (req, res) => {
+  res.render('search', {obj: req.body})
+  console.log(req.body);
 })
 
 app.listen(port, () => {
