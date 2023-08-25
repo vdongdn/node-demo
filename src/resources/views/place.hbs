@@ -1,0 +1,17 @@
+<div class="mt-4">
+    <div class="row">
+        {{#each place}}
+            <div class="col-md-6 col-lg-4">
+                <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{img}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text">{{this.content}}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
