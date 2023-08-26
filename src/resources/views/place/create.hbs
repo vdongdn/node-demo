@@ -1,0 +1,17 @@
+<div class="create-place mt-5">
+    <form action="/place/save" method="POST">
+    <div class="form-group mb-3">
+        <label for="txtname">Tên địa điểm</label>
+        <input type="text" class="form-control" name="name" id="txtname" placeholder="Nhập tên địa điểm">
+    </div>  
+    <div class="form-group mb-3">
+        <label for="image">URL hình ảnh</label>
+        <input type="text" class="form-control" name="image" id="image" placeholder="URL hình ảnh">
+    </div>
+    <div class="form-group mb-3">
+        <label for="content">Mô tả địa điểm</label>
+        <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm mới</button>
+    </form>
+</div>
