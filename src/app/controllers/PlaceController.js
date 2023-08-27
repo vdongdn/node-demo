@@ -28,15 +28,42 @@ class PlaceController {
         res.render('place/create')
     } 
 
+    //[GET] /place/:id/edit
+    async edit(req, res) {
+        try {
+            const place = await Place.findById(req.params.id);
+            res.render('place/edit', {place: mongooseToObject(place)})
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+        
+    //[GET] /place/:id/del
+    del(req, res) {
+        
+    } 
+
     //[POST] /place/save
     async save(req, res) {
-        const place = new Place(req.body);
-        place.status = 1;
-        const result =  await place.save();
-        if (result) {
-            res.redirect('/place');
+        try {
+            const placeId = req.body._id;
+            if (!placeId) {
+                const place = new Place(req.body);
+                place.status = 1;
+                const result =  await place.save();
+                if (result) {
+                    res.redirect('/place');
+                }
+            } else {
+                let {_id, ...newbody} = req.body;
+                const result =  await Place.findByIdAndUpdate(req.body._id, newbody)  
+                if (result) {
+                    res.redirect('/me/my-place');
+                }
+            }
+        } catch (error) {
+            res.json(req.body)
         }
-        res.json(req.body)
     }
 }
 module.exports = new PlaceController;

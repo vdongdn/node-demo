@@ -1,0 +1,28 @@
+<h2>Địa điểm của tôi</h2>
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ảnh đại diện</th>
+      <th scope="col">Tên địa điểm</th>
+      <th scope="col">Ngày tạo</th>
+      <th scope="col">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each place}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>
+        <img class="table-img" src="{{this.image}}" alt="">
+      </td>
+      <td>{{this.name}}</td>
+      <td>{{this.createdAt}}</td>
+      <td>
+        <a class="btn btn-link" href="/place/{{this._id}}/edit">Sửa</a>
+        <a class="btn btn-link" href="/place/{{this._id}}/del">Xóa</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

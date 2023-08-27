@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+mongoose.set('useNewUrlParser', true);
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1/travel_dev');
+        await mongoose.connect('mongodb://127.0.0.1/travel_dev', { useUnifiedTopology: true });
         console.log("Connect success!!!")
     } catch (error) {
         console.log("Connect fail!!!")
