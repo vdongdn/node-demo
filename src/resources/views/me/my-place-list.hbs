@@ -20,9 +20,46 @@
       <td>{{this.createdAt}}</td>
       <td>
         <a class="btn btn-link" href="/place/{{this._id}}/edit">Sửa</a>
-        <a class="btn btn-link" href="/place/{{this._id}}/del">Xóa</a>
+        <a class="btn btn-link" href="" data-bs-toggle="modal" data-bs-target="#delPlaceModal" data-id="{{this._id}}">Xóa</a>
       </td>
     </tr>
     {{/each}}
   </tbody>
 </table>
+<div class="modal fade" id="delPlaceModal" tabindex="-1" aria-labelledby="placeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="placeModalLabel">Xác nhận xóa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn xóa địa điểm này không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" id="btnDelPlace">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var placeId;
+        var btnDel = document.getElementById('btnDelPlace');
+        $('#delPlaceModal').on('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            placeId = button.getAttribute('data-id');
+        })
+
+        $('#btnDelPlace').on('click', () => {
+              $.post("/place/del", {_id: placeId}, function(result){
+                if(result.ok) {
+                  location.reload();
+                } else {
+                  alert(result.msg);
+                }
+              });
+        })
+    })
+</script>

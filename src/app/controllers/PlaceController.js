@@ -39,8 +39,13 @@ class PlaceController {
     } 
         
     //[GET] /place/:id/del
-    del(req, res) {
-        
+    async del(req, res) {
+        try {
+            const result = await Place.deleteOne({ _id: req.body._id });
+            res.status(200).json(result);
+        } catch (error) {
+            res.status(400).json({msg: error});
+        }
     } 
 
     //[POST] /place/save
