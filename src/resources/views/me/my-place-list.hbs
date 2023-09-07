@@ -1,8 +1,21 @@
 <h2>Địa điểm của tôi</h2>
+<div class="mt-4 d-flex align-items-center">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="placeCheckAll">
+    <label class="form-check-label" for="placeCheckAll">
+      Chọn tất cả
+    </label>
+  </div>
+  <select class="form-select form-select-sm place-select-action" id="selectAction" aria-label="Chọn hành động">
+    <option value="">-- Hành động --</option>
+    <option value="delete">Xóa</option>
+  </select>
+  <button class="btn btn-sm btn-primary" id="btnAction" disabled>Thực hiện</button>
+</div>
 <table class="table mt-4">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col" >#</th>
       <th scope="col">Ảnh đại diện</th>
       <th scope="col">Tên địa điểm</th>
       <th scope="col">Ngày tạo</th>
@@ -12,7 +25,10 @@
   <tbody>
     {{#each place}}
     <tr>
-      <th scope="row">{{sum @index 1}}</th>
+      <td>
+        <input class="form-check-input" type="checkbox" value="{{this._id}}" name="chk-places[]">
+      </td>
+      <td scope="row">{{sum @index 1}}</td>
       <td>
         <img class="table-img" src="{{this.image}}" alt="">
       </td>
@@ -47,6 +63,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         var placeId;
         var btnDel = document.getElementById('btnDelPlace');
+        var chkCheckAll = $('#placeCheckAll');
+        var chkCheckOne = $('input[name="chk-places[]"]');
+        var selectAction = $('#selectAction');
+
         $('#delPlaceModal').on('show.bs.modal', event => {
             const button = event.relatedTarget;
             placeId = button.getAttribute('data-id');
@@ -61,5 +81,25 @@
                 }
               });
         })
+
+        chkCheckAll.change(function() {
+          var isChecked =  $('#placeCheckAll').prop('checked');
+          chkCheckOne.prop('checked', isChecked );
+        })       
+        
+        chkCheckOne.change(function() {
+          var isCheckedAll =  chkCheckOne.length === $('input[name="chk-places[]"]:checked').length;
+          console.log("🚀 ~ isCheckedAll", isCheckedAll)
+          chkCheckAll.prop('checked', isCheckedAll);
+        })
+
+        selectAction.change(function() {
+          var option =  selectAction.val();
+          if (option) {
+            $('#btnAction').prop('disabled', false );
+          } else {
+            $('#btnAction').prop('disabled', true );
+          }
+        })  
     })
 </script>
