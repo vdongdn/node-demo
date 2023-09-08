@@ -10,7 +10,7 @@ class PlaceController {
           const place = await Place.find({});
           res.render('place/list', {place: multiMongooseToObject(place)})
         } catch (error) {
-            console.log("🚀 ~ file: PlaceController.js:11 ~ PlaceController ~ index ~ 'errr':", 'errr')
+            console.log(error);
         }
     }
 
