@@ -27,14 +27,20 @@ app.engine('hbs', engine({
   extname: ".hbs",
   helpers: {
     sum: (a, b) => a + b,
-    sortable: (field, type) => {
+    sortable: (field, sort) => {
+      const sortType = field === sort.column ? sort.type : 'default';
       const sortIcons = {
         'asc': 'fa-sort-asc',
         'desc': 'fa-sort-desc',
         'default': 'fa-sort'
       }
-      let icon =  sortIcons[type];
-      let _type = type == 'asc' ? 'desc' : 'asc';
+      const types = {
+        'asc': 'desc',
+        'desc': 'asc',
+        'default': 'asc'
+      }
+      let icon =  sortIcons[sortType];
+      let _type = types[sortType];
 
       return `<a href="?_sort&column=${field}&type=${_type}">
                 <i class="fa ${icon}" aria-hidden="true"></i>

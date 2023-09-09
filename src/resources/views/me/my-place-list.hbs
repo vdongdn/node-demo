@@ -15,13 +15,16 @@
 <table class="table mt-4">
   <thead>
     <tr>
-      <th scope="col" >#</th>
+      <th scope="col" colspan="2" >#</th>
       <th scope="col">Ảnh đại diện</th>
       <th scope="col">
         Tên địa điểm
-        {{{sortable 'name' _sort.type}}}
+        {{{sortable 'name' _sort}}}
       </th>
-      <th scope="col">Ngày tạo</th>
+      <th scope="col">
+        Ngày tạo
+        {{{sortable 'createdAt' _sort}}}
+        </th>
       <th scope="col">Thao tác</th>
     </tr>
   </thead>
