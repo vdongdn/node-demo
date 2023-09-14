@@ -14,6 +14,16 @@ class PlaceController {
         }
     }
 
+    //[GET] /getList
+    async getAllPlacesJson(req, res) {
+        try {
+          const place = await Place.find({});
+          res.json({places: place});
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     //[GET] /place/:slug
     async detail(req, res) {
         try {

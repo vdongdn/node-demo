@@ -7,6 +7,7 @@ const db = require('./config/db')
 const SortMiddleWare = require('./app/middlewares/SortMiddleware')
 const app = express()
 const port = 3000
+require('dotenv').config();
 
 //Connect to db
 db.connect();
